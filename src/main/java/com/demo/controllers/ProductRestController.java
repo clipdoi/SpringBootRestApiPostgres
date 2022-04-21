@@ -1,12 +1,12 @@
 package com.demo.controllers;
 
+import com.demo.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
-import com.demo.models.Product;
 import com.demo.services.ProductService;
 
 
@@ -21,7 +21,18 @@ public class ProductRestController {
 	public ResponseEntity<Iterable<Product>> getAllProduct(){
 		try {
 
-			return new ResponseEntity<>(productService.getAllProduct(), HttpStatus.OK);
+			return new ResponseEntity<Iterable<Product>>(productService.getAllProduct(), HttpStatus.OK);
+
+		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@RequestMapping(value="getProductByName/{keyword}", method= RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Iterable<Product>> getProductByName(@PathVariable String keyword){
+		try {
+
+			return new ResponseEntity<Iterable<Product>>(productService.searchByName(keyword), HttpStatus.OK);
 
 		}catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

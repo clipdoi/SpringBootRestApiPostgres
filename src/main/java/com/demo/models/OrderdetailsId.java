@@ -1,40 +1,22 @@
 package com.demo.models;
 
+import lombok.*;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Embeddable
 public class OrderdetailsId implements java.io.Serializable {
 
-	private int orderId;
-	private int productId;
-
-	public OrderdetailsId() {
-	}
-
-	public OrderdetailsId(int orderId, int productId) {
-		this.orderId = orderId;
-		this.productId = productId;
-	}
-
 	@Column(name = "orderid", nullable = false)
-	public int getOrderId() {
-		return this.orderId;
-	}
-
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
-	}
+	private int orderid;
 
 	@Column(name = "productid", nullable = false)
-	public int getProductId() {
-		return this.productId;
-	}
-
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
+	private int productid;
 
 	public boolean equals(Object other) {
 		if ((this == other))
@@ -45,14 +27,14 @@ public class OrderdetailsId implements java.io.Serializable {
 			return false;
 		OrderdetailsId castOther = (OrderdetailsId) other;
 
-		return (this.getOrderId() == castOther.getOrderId()) && (this.getProductId() == castOther.getProductId());
+		return (this.getOrderid() == castOther.getOrderid()) && (this.getProductid() == castOther.getProductid());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getOrderId();
-		result = 37 * result + this.getProductId();
+		result = 37 * result + this.getOrderid();
+		result = 37 * result + this.getProductid();
 		return result;
 	}
 

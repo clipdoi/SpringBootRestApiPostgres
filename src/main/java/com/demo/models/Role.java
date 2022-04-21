@@ -1,64 +1,46 @@
 package com.demo.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "role", catalog = "postgres")
+@Table(name = "role", schema = "public")
 public class Role implements java.io.Serializable {
 
-	private Integer id;
-	private String name;
-	private Set<Account> accounts = new HashSet<Account>(0);
-
-	public Role() {
-	}
-
-	public Role(String name) {
-		this.name = name;
-	}
-
-	public Role(String name, Set<Account> accounts) {
-		this.name = name;
-		this.accounts = accounts;
-	}
-
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
+	private int id;
 
-	public void setId(Integer id) {
+	@Column(name = "name", nullable = false, length = 50)
+	private String name;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
+	private Set<Account> accounts = new HashSet<Account>(0);
+
+	public Role(int id, String name) {
 		this.id = id;
-	}
-
-	@Column(name = "name", nullable = false, length = 150)
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	public Set<Account> getAccounts() {
-		return this.accounts;
-	}
 
-	public void setAccounts(Set<Account> accounts) {
-		this.accounts = accounts;
-	}
+
+
+
+
+
+
+
 
 }

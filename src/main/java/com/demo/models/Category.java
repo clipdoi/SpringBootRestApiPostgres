@@ -1,64 +1,38 @@
 package com.demo.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "category", catalog = "postgres")
+@Table(name = "category", schema = "public")
 public class Category implements java.io.Serializable {
 
-	private Integer id;
-	private String name;
-	private Set<Product> products = new HashSet<Product>(0);
-
-	public Category() {
-	}
-
-	public Category(String name, boolean status) {
-		this.name = name;
-	}
-
-	public Category(String name, boolean status, Set<Product> products) {
-		this.name = name;
-		this.products = products;
-	}
-
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
+	private int id;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	@Column(name = "name", nullable = false, length = 150)
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	@Column(name = "name", nullable = false, length = 50)
+	private String name;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-	public Set<Product> getProducts() {
-		return this.products;
-	}
+	private Set<Product> products = new HashSet<Product>(0);
 
-	public void setProducts(Set<Product> products) {
-		this.products = products;
+	public Category(int id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 
 }

@@ -1,11 +1,12 @@
 package com.demo.services;
 
+import com.demo.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.demo.models.Product;
-
 import com.demo.repositories.ProductRepository;
+
+import java.util.List;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
@@ -40,17 +41,22 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product update(Product product) {
-		Product p = productRepository.findById(product.getId()).get();
-		p.setName(product.getName());
-		p.setQuantity(product.getQuantity());
-		p.setPrice(product.getPrice());
-		p.setDescription(product.getDescription());
-		p.setStatus(product.isStatus());
-		p.setActivated(product.isActivated());
-		p.setCreated(product.getCreated());
-		return productRepository.save(p);
+	public List<Product> searchByName(String keyword) {
+		return productRepository.searchByName(keyword);
 	}
+
+//	@Override
+//	public Product update(Product product) {
+//		Product p = productRepository.findById(product.getId()).get();
+//		p.setName(product.getName());
+//		p.setQuantity(product.getQuantity());
+//		p.setPrice(product.getPrice());
+//		p.setDescription(product.getDescription());
+//		p.setStatus(product.isStatus());
+//		p.setActivated(product.isActivated());
+//		p.setCreated(product.getCreated());
+//		return productRepository.save(p);
+//	}
 
 
 

@@ -2,12 +2,11 @@ package com.demo.repositories;
 
 import java.util.List;
 
+import com.demo.models.Product;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import com.demo.models.Product;
 
 @Repository("productRepository")
 public interface ProductRepository extends CrudRepository<Product, Integer> {
@@ -17,8 +16,6 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 		
 		@Query("from Product where name like %:keyword%")
 		public List<Product> searchByName(@Param("keyword") String keyword);
-
-
 
 		@Query("from Product where categoryId = :categoryId")
 		public List<Product> findAllByCategory(@Param("categoryId") int categoryId);

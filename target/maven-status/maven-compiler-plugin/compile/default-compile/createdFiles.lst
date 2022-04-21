@@ -1,6 +1,13 @@
 com\demo\models\Product.class
 com\demo\services\ProductService.class
-com\demo\controllers\ProductRestController.class
+com\demo\models\Orders.class
+com\demo\models\Role.class
+com\demo\models2\Product2.class
+com\demo\models\OrderdetailsId.class
 com\demo\services\ProductServiceImpl.class
-DemoSession2SpringRestApiApplication.class
+com\demo\models\Account.class
+com\demo\models\Category.class
+com\demo\DemoSession2SpringRestApiApplication.class
+com\demo\models\Orderdetails.class
+com\demo\controllers\ProductRestController.class
 com\demo\repositories\ProductRepository.class
