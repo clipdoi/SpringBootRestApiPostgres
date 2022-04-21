@@ -1,0 +1,6 @@
+com\demo\models\Product.class
+com\demo\services\ProductService.class
+com\demo\controllers\ProductRestController.class
+com\demo\services\ProductServiceImpl.class
+DemoSession2SpringRestApiApplication.class
+com\demo\repositories\ProductRepository.class
