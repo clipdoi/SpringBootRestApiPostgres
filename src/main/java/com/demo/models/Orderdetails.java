@@ -1,5 +1,6 @@
 package com.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,10 +30,12 @@ public class Orderdetails implements java.io.Serializable {
 			@AttributeOverride(name = "productid", column = @Column(name = "productid", nullable = false)) })
 	private OrderdetailsId id;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "orderid", nullable = false, insertable = false, updatable = false)
 	private Orders orders;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "productid", nullable = false, insertable = false, updatable = false)
 	private Product product;

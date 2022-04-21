@@ -1,5 +1,6 @@
 package com.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class Role implements java.io.Serializable {
 	@Column(name = "name", nullable = false, length = 50)
 	private String name;
 
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
 	private Set<Account> accounts = new HashSet<Account>(0);
 

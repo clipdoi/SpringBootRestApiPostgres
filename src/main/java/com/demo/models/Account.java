@@ -1,5 +1,8 @@
 package com.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +26,7 @@ public class Account implements java.io.Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "roleid", nullable = false)
 	private Role role;
@@ -46,9 +50,13 @@ public class Account implements java.io.Serializable {
 	@Column(name = "activated", nullable = false)
 	private boolean activated;
 
+	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
 	private Set<Product> products = new HashSet<Product>(0);
 
+	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
 	private Set<Orders> orderses = new HashSet<Orders>(0);
 

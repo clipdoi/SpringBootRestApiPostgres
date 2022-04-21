@@ -1,5 +1,8 @@
 package com.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import java.util.Date;
@@ -21,10 +24,12 @@ public class Product implements java.io.Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "accountid", nullable = false)
 	private Account account;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "categoryid", nullable = false)
 	private Category category;
@@ -51,6 +56,8 @@ public class Product implements java.io.Serializable {
 	@Column(name = "created", nullable = false, length = 13)
 	private Date created;
 
+	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	private Set<Orderdetails> orderdetailses = new HashSet<Orderdetails>(0);
 

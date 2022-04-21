@@ -1,5 +1,7 @@
 package com.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import java.util.HashSet;
@@ -23,6 +25,8 @@ public class Category implements java.io.Serializable {
 	@Column(name = "name", nullable = false, length = 50)
 	private String name;
 
+	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	private Set<Product> products = new HashSet<Product>(0);
 
