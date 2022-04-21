@@ -29,18 +29,6 @@ public class Role implements java.io.Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
 	private Set<Account> accounts = new HashSet<Account>(0);
 
-	public Role(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-
-
-
-
-
-
-
 
 
 }

@@ -47,24 +47,5 @@ public class Orders implements java.io.Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
 	private Set<Orderdetails> orderdetailses = new HashSet<Orderdetails>(0);
 
-	public Orders(int id, Account account, Date orderdate, String address, String description, String phone,
-                  short status) {
-		this.id = id;
-		this.account = account;
-		this.orderdate = orderdate;
-		this.address = address;
-		this.description = description;
-		this.phone = phone;
-		this.status = status;
-	}
-
-
-
-
-
-
-
-
-
 
 }

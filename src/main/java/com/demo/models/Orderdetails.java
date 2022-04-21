@@ -43,11 +43,4 @@ public class Orderdetails implements java.io.Serializable {
 	@Column(name = "amountperprd", precision = 17, scale = 17)
 	private Double amountperprd;
 
-	public Orderdetails(OrderdetailsId id, Orders orders, Product product, int quantity) {
-		this.id = id;
-		this.orders = orders;
-		this.product = product;
-		this.quantity = quantity;
-	}
-
 }

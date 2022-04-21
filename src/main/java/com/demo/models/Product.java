@@ -1,9 +1,6 @@
 package com.demo.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -57,18 +54,5 @@ public class Product implements java.io.Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	private Set<Orderdetails> orderdetailses = new HashSet<Orderdetails>(0);
 
-	public Product(int id, Account account, Category category, String name, int quantity, double price,
-                   String description, boolean status, boolean activated, Date created) {
-		this.id = id;
-		this.account = account;
-		this.category = category;
-		this.name = name;
-		this.quantity = quantity;
-		this.price = price;
-		this.description = description;
-		this.status = status;
-		this.activated = activated;
-		this.created = created;
-	}
 
 }

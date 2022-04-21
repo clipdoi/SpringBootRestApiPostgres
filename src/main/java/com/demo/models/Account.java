@@ -52,22 +52,4 @@ public class Account implements java.io.Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
 	private Set<Orders> orderses = new HashSet<Orders>(0);
 
-	public Account(int id, Role role, String username, String password, String fullname, String email, Date created,
-                   boolean activated) {
-		this.id = id;
-		this.role = role;
-		this.username = username;
-		this.password = password;
-		this.fullname = fullname;
-		this.email = email;
-		this.created = created;
-		this.activated = activated;
-	}
-
-
-
-
-
-
-
 }

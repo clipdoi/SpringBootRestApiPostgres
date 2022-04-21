@@ -1,14 +1,10 @@
 package com.demo.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
