@@ -4,26 +4,23 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "orders", schema = "public")
 public class Orders implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 
@@ -34,7 +31,7 @@ public class Orders implements java.io.Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "orderdate", nullable = false, length = 13)
-	private Date orderdate;
+	private Date orderDate;
 
 	@Column(name = "address", nullable = false, length = 250)
 	private String address;
@@ -51,7 +48,7 @@ public class Orders implements java.io.Serializable {
 	@JsonManagedReference
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
-	private Set<Orderdetails> orderdetailses = new HashSet<Orderdetails>(0);
+	private Set<Orderdetails> orderDetails = new HashSet<>();
 
 
 }

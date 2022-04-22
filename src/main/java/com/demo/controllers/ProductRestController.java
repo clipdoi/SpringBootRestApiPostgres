@@ -1,78 +1,50 @@
 package com.demo.controllers;
 
 import com.demo.models.Product;
+import com.demo.services.ProductService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
-import com.demo.services.ProductService;
+import java.util.List;
 
 
+@Log4j2
 @RestController
 @RequestMapping("api/product")
 public class ProductRestController {
 
-	@Autowired
-	private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
-	@RequestMapping(value="getAllProduct", method= RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Iterable<Product>> getAllProduct(){
-		try {
+    @GetMapping
+    public ResponseEntity<List<Product>> getAllProduct() {
+        return new ResponseEntity<>(productService.getAllProduct(), HttpStatus.OK);
+    }
 
-			return new ResponseEntity<Iterable<Product>>(productService.getAllProduct(), HttpStatus.OK);
+    @GetMapping("/{keyword}")
+    public ResponseEntity<List<Product>> getProductByName(@PathVariable String keyword) {
+        return new ResponseEntity<>(productService.searchByName(keyword), HttpStatus.OK);
+    }
 
-		}catch(Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
+    @PostMapping
+    public ResponseEntity<Product> create(@RequestBody Product product) {
+        log.info("product: {}", product);
+        return new ResponseEntity<>(productService.save(product), HttpStatus.OK);
+    }
 
-	@RequestMapping(value="getProductByName/{keyword}", method= RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Iterable<Product>> getProductByName(@PathVariable String keyword){
-		try {
+    @PutMapping
+    public ResponseEntity<Product> update(@RequestBody Product product) {
+        log.info("product: {}", product);
+        return new ResponseEntity<>(productService.update(product), HttpStatus.OK);
+    }
 
-			return new ResponseEntity<Iterable<Product>>(productService.searchByName(keyword), HttpStatus.OK);
-
-		}catch(Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
-
-//	@RequestMapping(value="create", method= RequestMethod.POST,
-//			produces = MimeTypeUtils.APPLICATION_JSON_VALUE,
-//			consumes = MimeTypeUtils.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<Product2> create(@RequestBody Product2 product){
-//		try {
-//			System.out.println("id: " + product.getId());
-//			System.out.println("name: "+product.getName());
-//			return new ResponseEntity<Product2>(productService.save(product), HttpStatus.OK);
-//		}catch(Exception e) {
-//			return new ResponseEntity<Product2>(HttpStatus.BAD_REQUEST);
-//		}
-//	}
-//
-//	@RequestMapping(value="update", method= RequestMethod.PUT,
-//			produces = MimeTypeUtils.APPLICATION_JSON_VALUE,
-//			consumes = MimeTypeUtils.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<Product2> update(@RequestBody Product2 product){
-//		try {
-//			System.out.println("id: " + product.getId());
-//			System.out.println("name: "+product.getName());
-//			return new ResponseEntity<Product2>(productService.update(product), HttpStatus.OK);
-//		}catch(Exception e) {
-//			return new ResponseEntity<Product2>(HttpStatus.BAD_REQUEST);
-//		}
-//	}
-//
-//	@RequestMapping(value="delete/{id}", method= RequestMethod.DELETE, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<String> delete(@PathVariable("id") String id){
-//		try {
-//			return new ResponseEntity<String>(String.valueOf(productService.delete(Integer.parseInt(id))), HttpStatus.OK);
-//		}catch(Exception e) {
-//			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-//		}
-//	}
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") String id) {
+        return new ResponseEntity<>(String.valueOf(productService.delete(Integer.parseInt(id))), HttpStatus.OK);
+    }
 
 
 }
