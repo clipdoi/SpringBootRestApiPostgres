@@ -2,30 +2,20 @@ package com.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+
+@Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@Entity
 @Table(name = "orderdetails", schema = "public")
 public class Orderdetails implements java.io.Serializable {
 
 	@EmbeddedId
-
 	@AttributeOverrides({ @AttributeOverride(name = "orderid", column = @Column(name = "orderid", nullable = false)),
 			@AttributeOverride(name = "productid", column = @Column(name = "productid", nullable = false)) })
 	private OrderdetailsId id;
@@ -44,6 +34,6 @@ public class Orderdetails implements java.io.Serializable {
 	private int quantity;
 
 	@Column(name = "amountperprd", precision = 17, scale = 17)
-	private Double amountperprd;
+	private Double amountPerProduct;
 
 }

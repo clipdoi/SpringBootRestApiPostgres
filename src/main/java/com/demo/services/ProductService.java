@@ -1,16 +1,15 @@
 package com.demo.services;
 
 import com.demo.models.Product;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface ProductService {
 
-	public Iterable<Product> getAllProduct();
-	public Product find(int id);
-	public Product save(Product product);
-	public boolean delete(int id);
-//	public Product update(Product product);
-	public List<Product> searchByName(String keyword);
+	List<Product> getAllProduct();
+	Product find(int id);
+	Product save(Product product);
+	boolean delete(int id);
+    Product update(Product product);
+	List<Product> searchByName(String keyword);
 }

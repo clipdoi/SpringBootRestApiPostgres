@@ -3,24 +3,27 @@ package com.demo.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
 
+
+@Data
+@Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@Entity
 @Table(name = "product", schema = "public")
 public class Product implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 
@@ -59,7 +62,7 @@ public class Product implements java.io.Serializable {
 	@JsonManagedReference
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	private Set<Orderdetails> orderdetailses = new HashSet<Orderdetails>(0);
+	private Set<Orderdetails> orderDetails = new HashSet<>();
 
 
 }
